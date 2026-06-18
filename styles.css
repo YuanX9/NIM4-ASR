@@ -242,7 +242,7 @@ h3 {
 .button .btn-text {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   line-height: 1.15;
 }
 
@@ -506,14 +506,19 @@ h2.section-subtitle {
   background: #ffffff;
 }
 
-/* In-section divider: a short centered line instead of the full-width
-   section rule, since this block continues the Method section above. */
+/* In-section divider: a line spanning the width of the two columns below
+   (instead of the full-width section rule), since this block continues the
+   Method section above. The ::before is a grid item spanning both columns. */
 .section.is-subsection {
   border-top: 0;
-  background-image: linear-gradient(var(--line), var(--line));
-  background-repeat: no-repeat;
-  background-position: top center;
-  background-size: 72px 2px;
+  padding-top: clamp(48px, 6vw, 72px);
+}
+
+.section.is-subsection::before {
+  content: "";
+  grid-column: 1 / -1;
+  height: 1px;
+  background: #d7dde5;
 }
 
 .results-layout {
