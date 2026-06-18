@@ -8,7 +8,13 @@
       content="NIM4-ASR project page: efficient, robust, and customizable real-time LLM-based ASR."
     />
     <title>NIM4-ASR</title>
-    <link rel="stylesheet" href="./styles.css?v=20260618-6" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css?v=20260618-13" />
   </head>
   <body>
     <header class="topbar">
@@ -39,19 +45,29 @@
         </div>
         <div class="hero-copy">
           <p class="subtitle">
-            NIM4-ASR is a 2.3B-parameter production-oriented LLM-based ASR framework designed for
-            low-latency streaming speech recognition, robustness against hallucinations, and million-scale
-            hotword customization.
+            <span class="subtitle-brand">NIM4-ASR</span> is a 2.3B-parameter production-oriented LLM-based ASR framework designed for
+            <strong>low-latency</strong> streaming speech recognition, <strong>robustness</strong> against hallucinations, and million-scale
+            <strong>hotword customization</strong>.
           </p>
           <p class="authors">
             Yuan Xie*, Jiaqi Song*, Guang Qiu, Xianliang Wang, Kai Qiao, Junfeng Yuan,
             Shengqing Liu, Yi Zhang, Bowen Chen, Ming Lei, Jie Gao, Jie Wu
           </p>
+          <p class="affiliation">Advanced Intelligence Group, NIO</p>
           <div class="actions">
-            <a class="button primary" href="./assets/nim4-asr-paper.pdf">Open PDF</a>
-            <a class="button" href="#citation">Citation</a>
-            <a class="button" href="https://huggingface.co/NIO-LLM" target="_blank" rel="noreferrer">
-              Our paper collection
+            <a class="button primary" href="https://arxiv.org/abs/2604.18105" target="_blank" rel="noreferrer">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M14 3v5h5M9 13h6M9 17h6M9 9h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Paper</span>
+            </a>
+            <a class="button hf" href="https://huggingface.co/NIO-LLM" target="_blank" rel="noreferrer">
+              <img class="btn-icon" src="./assets/hf-logo.svg" alt="" width="24" height="24" decoding="async" />
+              <span>Hugging Face</span>
+            </a>
+            <a class="button" href="#citation">
+              <span>Citation</span>
             </a>
           </div>
         </div>
@@ -282,13 +298,13 @@
                       src="./audio/EN-cs_dialogue-YEAH_I_WATCHED_THE_MOVIE_FOR_TWICE_TWICE.mp3"
                     ></audio>
                   </td>
-                  <td>YEAH I WATCHED THE MOVIE FOR TWICE TWICE AND MY MY BEST FRIENDS HAVE WATCHED FROM NINE NINE THE NINE TIMES OH MY GOD AND IM SO SHOCK RIGHT NOW IT IS INCREDIBLY HES YEAH HES THE BIG HES THE BIG FAN OF TAYLOR SWIFT</td>
-                  <td class="transcript-cell"><span class="metric best">WER 8.89</span>YEAH I WATCHED THE MOVIE FOR TWICE TWICE AND MY MY BEST FRIENDS HAVE WATCHED <span class="diff-text">IT FOR</span> NINE NINE THE NINE TIMES OH MY GOD AND IM SO <span class="diff-text">SHOCKED</span> RIGHT NOW IT IS INCREDIBLY HES YEAH HES THE <span class="diff-text">BIGGEST</span> HES THE BIG FAN OF TAYLOR SWIFT</td>
-                  <td class="transcript-cell"><span class="metric cer-error">WER 22.22</span>YEAH I WATCHED THE MOVIE FOR TWICE TWICE AND MY MY BEST FRIENDS HAVE WATCHED <span class="diff-text">IT FOR</span> NINE NINE THE NINE TIMES OH MY GOD <span class="diff-text omission-mark">__</span> IM SO <span class="diff-text">SHOCKED</span> RIGHT NOW <span class="diff-text">IT IT IT</span> INCREDIBLY HES <span class="diff-text">A</span> YEAH HES THE <span class="diff-text">BIGGEST</span> HES THE BIG FAN OF <span class="diff-text">TAKERS WITH</span></td>
-                  <td class="transcript-cell"><span class="metric cer-error">WER 17.78</span>YEAH I WATCHED THE MOVIE FOR TWICE TWICE AND MY MY BEST FRIENDS HAVE WATCHED <span class="diff-text">IT FOR</span> NINE NINE <span class="diff-text omission-mark">__</span> NINE TIMES OH MY GOD <span class="diff-text omission-mark">__</span> IM SO <span class="diff-text">SHOCKED</span> RIGHT NOW IT IT IS INCREDIBLY HES <span class="diff-text">A</span> YEAH HES THE <span class="diff-text">BIGGEST</span> HES THE BIG FAN OF TAYLOR SWIFT</td>
-                  <td class="transcript-cell"><span class="metric cer-error">WER 15.56</span>YEAH I WATCHED THE MOVIE FOR TWICE TWICE AND MY MY BEST FRIENDS HAVE WATCHED <span class="diff-text">IT</span> FROM NINE NINE THE NINE TIMES OH MY GOD <span class="diff-text">IS</span> IM SO <span class="diff-text">SHOCKED</span> RIGHT NOW IT <span class="diff-text">IT IT</span> IS INCREDIBLY HES <span class="diff-text">A</span> YEAH HES THE <span class="diff-text">BIGGEST</span> HES THE BIG FAN OF TAYLOR SWIFT</td>
-                  <td class="transcript-cell"><span class="metric cer-error">WER 17.78</span>YEAH I WATCHED THE MOVIE FOR TWICE TWICE AND MY MY BEST FRIENDS HAVE WATCHED <span class="diff-text">IT FOR</span> NINE NINE THE NINE TIMES OH MY GOD <span class="diff-text omission-mark">__</span> IM SO <span class="diff-text">SHOCKED</span> RIGHT NOW IT <span class="diff-text">IT ITS</span> INCREDIBLY HES <span class="diff-text">A</span> YEAH HES THE <span class="diff-text">BIGGEST</span> HES THE BIG FAN OF TAYLOR SWIFT</td>
-                  <td class="transcript-cell"><span class="metric cer-error">WER 44.44</span><span class="diff-text">YES</span> I WATCHED THE MOVIE <span class="diff-text omission-mark">__</span> TWICE AND MY <span class="diff-text omission-mark">__</span> BEST FRIEND <span class="diff-text">HAS</span> WATCHED <span class="diff-text">IT</span> NINE TIMES OH MY GOD <span class="diff-text omission-mark">__</span> IM SO <span class="diff-text">SHOCKED</span> RIGHT NOW <span class="diff-text omission-mark">__</span> INCREDIBLY HES <span class="diff-text omission-mark">__</span> THE <span class="diff-text">BIGGEST</span> FAN OF TAYLOR SWIFT</td>
+                  <td>yeah I watched the movie for twice twice and my my best friends have watched from nine nine the nine times oh my god and Im so shock right now it is incredibly hes yeah hes the big hes the big fan of taylor swift</td>
+                  <td class="transcript-cell"><span class="metric best">WER 8.89</span>yeah I watched the movie for twice twice and my my best friends have watched <span class="diff-text">it for</span> nine nine the nine times oh my god and Im so <span class="diff-text">shocked</span> right now it is incredibly hes yeah hes the <span class="diff-text">biggest</span> hes the big fan of taylor swift</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 22.22</span>yeah I watched the movie for twice twice and my my best friends have watched <span class="diff-text">it for</span> nine nine the nine times oh my god <span class="diff-text omission-mark">__</span> Im so <span class="diff-text">shocked</span> right now <span class="diff-text">it it it</span> incredibly hes <span class="diff-text">a</span> yeah hes the <span class="diff-text">biggest</span> hes the big fan of <span class="diff-text">takers with</span></td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 17.78</span>yeah I watched the movie for twice twice and my my best friends have watched <span class="diff-text">it for</span> nine nine <span class="diff-text omission-mark">__</span> nine times oh my god <span class="diff-text omission-mark">__</span> Im so <span class="diff-text">shocked</span> right now it it is incredibly hes <span class="diff-text">a</span> yeah hes the <span class="diff-text">biggest</span> hes the big fan of taylor swift</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 15.56</span>yeah I watched the movie for twice twice and my my best friends have watched <span class="diff-text">it</span> from nine nine the nine times oh my god <span class="diff-text">is</span> Im so <span class="diff-text">shocked</span> right now it <span class="diff-text">it it</span> is incredibly hes <span class="diff-text">a</span> yeah hes the <span class="diff-text">biggest</span> hes the big fan of taylor swift</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 17.78</span>yeah I watched the movie for twice twice and my my best friends have watched <span class="diff-text">it for</span> nine nine the nine times oh my god <span class="diff-text omission-mark">__</span> Im so <span class="diff-text">shocked</span> right now it <span class="diff-text">it its</span> incredibly hes <span class="diff-text">a</span> yeah hes the <span class="diff-text">biggest</span> hes the big fan of taylor swift</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 44.44</span><span class="diff-text">yes</span> I watched the movie <span class="diff-text omission-mark">__</span> twice and my <span class="diff-text omission-mark">__</span> best friend <span class="diff-text">has</span> watched <span class="diff-text">it</span> nine times oh my god <span class="diff-text omission-mark">__</span> Im so <span class="diff-text">shocked</span> right now <span class="diff-text omission-mark">__</span> incredibly hes <span class="diff-text omission-mark">__</span> the <span class="diff-text">biggest</span> fan of taylor swift</td>
                 </tr>
                 <tr>
                   <td>
@@ -301,13 +317,13 @@
                       src="./audio/EN-librispeech_test_other-LUKE_TOOK_CARE_OF_MISTER_LARKINS_DOGS_AND_GROOMED_MISTER.mp3"
                     ></audio>
                   </td>
-                  <td>LUKE TOOK CARE OF MISTER LARKINS DOGS AND GROOMED MISTER WYLDERS HORSE AND CLEANED UP HIS DOG CART FOR MARK BEING CLOSE ABOUT MONEY AND FINDING THAT THE THING WAS TO BE DONE MORE CHEAPLY THAT WAY PUT UP HIS HORSE AND DOG CART IN THE POST OFFICE PREMISES AND SO EVADED THE LIVERY CHARGES OF THE BRANDON ARMS</td>
-                  <td class="transcript-cell"><span class="metric best">WER 1.69</span>LUKE TOOK CARE OF MISTER LARKINS DOGS AND GROOMED MISTER <span class="diff-text">WILDERS</span> HORSE AND CLEANED UP HIS DOG CART FOR MARK BEING CLOSE ABOUT MONEY AND FINDING THAT THE THING WAS TO BE DONE MORE CHEAPLY THAT WAY PUT UP HIS HORSE AND DOG CART IN THE POST OFFICE PREMISES AND SO EVADED THE LIVERY CHARGES OF THE BRANDON ARMS</td>
-                  <td class="transcript-cell"><span class="metric cer-error">WER 15.25</span>LUKE TOOK CARE OF MISTER LARKINS DOGS AND GROOMED MISTER WYLDERS HORSE AND CLEANED UP HIS <span class="diff-text">DOGCART</span> FOR <span class="diff-text">MOCK WING CLOTHES</span> ABOUT MONEY AND FINDING THAT THE THING WAS TO BE DONE MORE CHEAPLY THAT WAY PUT UP HIS HORSE AND <span class="diff-text">DOGCART</span> IN THE <span class="diff-text">POSTOFFICE</span> PREMISES AND SO EVADED THE LIVERY CHARGES OF THE BRANDON ARMS</td>
-                  <td class="transcript-cell"><span class="metric cer-error">WER 5.08</span>LUKE TOOK CARE OF MISTER LARKINS DOGS AND GROOMED MISTER <span class="diff-text">WILDERS</span> HORSE AND CLEANED UP HIS DOG CART FOR MARK BEING CLOSE ABOUT MONEY AND FINDING THAT THE THING WAS TO BE DONE MORE CHEAPLY THAT WAY PUT UP HIS HORSE AND DOG CART IN THE POST OFFICE PREMISES AND SO EVADED THE LIVERY CHARGES OF THE <span class="diff-text">BRAND AND</span> ARMS</td>
-                  <td class="transcript-cell"><span class="metric cer-error">WER 8.47</span>LUKE TOOK CARE OF MISTER LARKINS DOGS AND GROOMED MISTER <span class="diff-text">WILDERS</span> HORSE AND CLEANED UP HIS <span class="diff-text">DOGCART</span> FOR MARK BEING CLOSE ABOUT MONEY AND FINDING THAT THE THING WAS TO BE DONE MORE CHEAPLY THAT WAY PUT UP HIS HORSE AND <span class="diff-text">DOGCART</span> IN THE POST OFFICE PREMISES AND SO EVADED THE LIVERY CHARGES OF THE BRANDON ARMS</td>
-                  <td class="transcript-cell"><span class="metric cer-error">WER 8.47</span><span class="diff-text">LUC</span> TOOK CARE OF <span class="diff-text">MR</span> <span class="diff-text">LARKINSS</span> DOGS AND GROOMED <span class="diff-text">MR</span> <span class="diff-text">WILDERS</span> HORSE AND CLEANED UP HIS DOG CART FOR MARK BEING CLOSE ABOUT MONEY AND FINDING THAT THE THING WAS TO BE DONE MORE CHEAPLY THAT WAY PUT UP HIS HORSE AND DOG CART IN THE POST OFFICE PREMISES AND SO EVADED THE LIVERY CHARGES OF THE BRANDON ARMS</td>
-                  <td class="transcript-cell"><span class="metric cer-error">WER 10.17</span>LUKE TOOK CARE OF MISTER <span class="diff-text">LARKINSS</span> DOGS AND GROOMED MISTER <span class="diff-text">WILDERS</span> HORSE AND CLEANED UP HIS <span class="diff-text">DOGCART</span> FOR MARK BEING CLOSE ABOUT MONEY AND FINDING THAT THE THING WAS TO BE DONE MORE CHEAPLY THAT WAY PUT UP HIS HORSE AND <span class="diff-text">DOGCART</span> IN THE POST OFFICE PREMISES AND SO EVADED THE LIVERY CHARGES OF THE BRANDON ARMS</td>
+                  <td>luke took care of mister larkins dogs and groomed mister wylders horse and cleaned up his dog cart for mark being close about money and finding that the thing was to be done more cheaply that way put up his horse and dog cart in the post office premises and so evaded the livery charges of the brandon arms</td>
+                  <td class="transcript-cell"><span class="metric best">WER 1.69</span>luke took care of mister larkins dogs and groomed mister <span class="diff-text">wilders</span> horse and cleaned up his dog cart for mark being close about money and finding that the thing was to be done more cheaply that way put up his horse and dog cart in the post office premises and so evaded the livery charges of the brandon arms</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 15.25</span>luke took care of mister larkins dogs and groomed mister wylders horse and cleaned up his <span class="diff-text">dogcart</span> for <span class="diff-text">mock wing clothes</span> about money and finding that the thing was to be done more cheaply that way put up his horse and <span class="diff-text">dogcart</span> in the <span class="diff-text">postoffice</span> premises and so evaded the livery charges of the brandon arms</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 5.08</span>luke took care of mister larkins dogs and groomed mister <span class="diff-text">wilders</span> horse and cleaned up his dog cart for mark being close about money and finding that the thing was to be done more cheaply that way put up his horse and dog cart in the post office premises and so evaded the livery charges of the <span class="diff-text">brand and</span> arms</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 8.47</span>luke took care of mister larkins dogs and groomed mister <span class="diff-text">wilders</span> horse and cleaned up his <span class="diff-text">dogcart</span> for mark being close about money and finding that the thing was to be done more cheaply that way put up his horse and <span class="diff-text">dogcart</span> in the post office premises and so evaded the livery charges of the brandon arms</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 8.47</span><span class="diff-text">luc</span> took care of <span class="diff-text">mr</span> <span class="diff-text">larkinss</span> dogs and groomed <span class="diff-text">mr</span> <span class="diff-text">wilders</span> horse and cleaned up his dog cart for mark being close about money and finding that the thing was to be done more cheaply that way put up his horse and dog cart in the post office premises and so evaded the livery charges of the brandon arms</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 10.17</span>luke took care of mister <span class="diff-text">larkinss</span> dogs and groomed mister <span class="diff-text">wilders</span> horse and cleaned up his <span class="diff-text">dogcart</span> for mark being close about money and finding that the thing was to be done more cheaply that way put up his horse and <span class="diff-text">dogcart</span> in the post office premises and so evaded the livery charges of the brandon arms</td>
                 </tr>
                 <tr>
                   <td>
@@ -320,13 +336,13 @@
                       src="./audio/EN-voice_in_the_wild_bench-I_NEED_TO_REVIEW_THE_BUDGET_AGAIN_BEFORE_APPROVING_THE_PURCHASE_REQUEST.mp3"
                     ></audio>
                   </td>
-                  <td>I NEED TO REVIEW THE BUDGET AGAIN BEFORE APPROVING THE PURCHASE REQUEST</td>
-                  <td class="transcript-cell"><span class="metric best">WER 0.00</span>I NEED TO REVIEW THE BUDGET AGAIN BEFORE APPROVING THE PURCHASE REQUEST</td>
-                  <td class="transcript-cell"><span class="metric cer-error">WER 33.33</span>I NEED TO REVIEW THE BUDGET AGAIN BEFORE APPROVING <span class="diff-text">THEM FOR THE BUDGET MEETING</span></td>
-                  <td class="transcript-cell"><span class="metric cer-error">WER 25.00</span>I NEED TO REVIEW THE BUDGET AGAIN <span class="diff-text">FOR</span> APPROVING THE <span class="diff-text">PURCHASES</span></td>
-                  <td class="transcript-cell"><span class="metric cer-error">WER 25.00</span>I NEED TO REVIEW THE BUDGET AGAIN BEFORE APPROVING <span class="diff-text">IT</span></td>
-                  <td class="transcript-cell"><span class="metric cer-error">WER 8.33</span>I NEED TO REVIEW THE BUDGET AGAIN BEFORE APPROVING THE PURCHASE <span class="diff-text">ORDER</span></td>
-                  <td class="transcript-cell"><span class="metric cer-error">WER 41.67</span>I NEED TO REVIEW THE BUDGET AGAIN <span class="diff-text">FOR UPCOMING DELTA PURCHASES</span></td>
+                  <td>I need to review the budget again before approving the purchase request</td>
+                  <td class="transcript-cell"><span class="metric best">WER 0.00</span>I need to review the budget again before approving the purchase request</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 33.33</span>I need to review the budget again before approving <span class="diff-text">them for the budget meeting</span></td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 25.00</span>I need to review the budget again <span class="diff-text">for</span> approving the <span class="diff-text">purchases</span></td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 25.00</span>I need to review the budget again before approving <span class="diff-text">it</span></td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 8.33</span>I need to review the budget again before approving the purchase <span class="diff-text">order</span></td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 41.67</span>I need to review the budget again <span class="diff-text">for upcoming delta purchases</span></td>
                 </tr>
               </tbody>
               </table>
@@ -360,13 +376,13 @@
                       src="./audio/CS-ascend-平时就是我们做PRE的时候他们尽量就是.mp3"
                     ></audio>
                   </td>
-                  <td>平时就是我们做PRE的时候他们尽量就是</td>
-                  <td class="transcript-cell"><span class="metric best">CER 0.00</span>平时就是我们做PRE的时候他们尽量就是</td>
+                  <td>平时就是我们做pre的时候他们尽量就是</td>
+                  <td class="transcript-cell"><span class="metric best">CER 0.00</span>平时就是我们做pre的时候他们尽量就是</td>
                   <td class="transcript-cell"><span class="metric cer-error">CER 5.88</span>平时就是我们做<span class="diff-text">推</span>的时候他们尽量就是</td>
                   <td class="transcript-cell"><span class="metric cer-error">CER 5.88</span>平时就是我们做<span class="diff-text">推</span>的时候他们尽量就是</td>
-                  <td class="transcript-cell"><span class="metric cer-error">CER 5.88</span>平时就是我们做<span class="diff-text">PLAY</span>的时候他们尽量就是</td>
-                  <td class="transcript-cell"><span class="metric cer-error">CER 5.88</span>平时就是我们做<span class="diff-text">PLAY</span>的时候他们尽量就是</td>
-                  <td class="transcript-cell"><span class="metric cer-error">CER 5.88</span>平时就是我们做<span class="diff-text">PLAY</span>的时候他们尽量就是</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 5.88</span>平时就是我们做<span class="diff-text">play</span>的时候他们尽量就是</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 5.88</span>平时就是我们做<span class="diff-text">play</span>的时候他们尽量就是</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 5.88</span>平时就是我们做<span class="diff-text">play</span>的时候他们尽量就是</td>
                 </tr>
                 <tr>
                   <td>
@@ -379,13 +395,13 @@
                       src="./audio/CS-cs_dialogue-好的OF_COURSE.mp3"
                     ></audio>
                   </td>
-                  <td>好的OF COURSE</td>
-                  <td class="transcript-cell"><span class="metric best">CER 0.00</span>好的OF COURSE</td>
-                  <td class="transcript-cell"><span class="metric cer-error">CER 50.00</span><span class="diff-text">HAD THAT</span> OF COURSE</td>
-                  <td class="transcript-cell"><span class="metric cer-error">CER 50.00</span><span class="diff-text">HADA</span> OF COURSE</td>
-                  <td class="transcript-cell"><span class="metric cer-error">CER 50.00</span><span class="diff-text">HOW THAT</span> OF COURSE</td>
+                  <td>好的of course</td>
+                  <td class="transcript-cell"><span class="metric best">CER 0.00</span>好的of course</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 50.00</span><span class="diff-text">had that</span> of course</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 50.00</span><span class="diff-text">hada</span> of course</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 50.00</span><span class="diff-text">how that</span> of course</td>
                   <td class="transcript-cell"><span class="metric cer-error">CER &gt;100</span><span class="diff-text">哈那那那那那那那那那那那那那那那那那那那......</span></td>
-                  <td class="transcript-cell"><span class="metric best">CER 0.00</span>好的OF COURSE</td>
+                  <td class="transcript-cell"><span class="metric best">CER 0.00</span>好的of course</td>
                 </tr>
               </tbody>
               </table>
@@ -493,8 +509,12 @@
         <div class="method-note">
           Our training design, from pretraining through SFT, is guided by an entropy-allocation analysis of the Encoder–Adaptor–LLM architecture. 
           Readers interested in this topic can refer to our work: "Rethinking Entropy Allocation in LLM-based ASR: Understanding the Dynamics between Speech Encoders and LLMs"
-          <a class="inline-paper-link" href="https://arxiv.org/pdf/2604.08003" target="_blank" rel="noreferrer">
-            Open paper
+          <a class="inline-paper-link" href="https://arxiv.org/abs/2604.08003" target="_blank" rel="noreferrer">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="M14 3v5h5M9 13h6M9 17h6M9 9h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Paper</span>
           </a>
         </div>
       </section>
@@ -505,8 +525,8 @@
           <h2 class="section-subtitle section-subtitle-small">Real-Time Inference</h2>
           <p>
             NIM4-ASR uses a decoupled deployment architecture: the encoder runs on Triton; the adaptor and LLM run in a
-            vLLM-based engine; and the phoneme head with RAG module run on CPU. Speech embeddings are appended incrementally 
-            via streaming chunked prefill, and the LLM performs a final full-context decoding pass after VAD detects the end of speech.
+            vLLM-based engine; and the phoneme head with RAG module run on CPU. Speech embeddings are appended incrementally
+            via streaming chunked prefill, enabling real-time partial transcription followed by a stable second-pass final decoding after VAD detects the end of speech.
           </p>
         </div>
         <div>
@@ -651,25 +671,216 @@
         <div class="section-head">
           <h2>Citation</h2>
         </div>
-        <pre><code>@article{xie2026nim4,
-  title={NIM4-ASR: Towards Efficient, Robust, and Customizable Real-Time LLM-Based ASR},
-  author={Xie, Yuan and Song, Jiaqi and Qiu, Guang and Wang, Xianliang and Qiao, Kai and Yuan, Junfeng and Liu, Shengqing and Zhang, Yi and Chen, Bowen and Lei, Ming and others},
-  journal={arXiv preprint arXiv:2604.18105},
-  year={2026}
-}
-
-@article{xie2026rethinking,
+        <div class="citation-grid">
+          <article class="citation-block">
+            <div class="citation-head">
+              <span class="citation-label">Rethinking Entropy Allocation in LLM-based ASR</span>
+              <button type="button" class="copy-button" data-copy-target="cite-entropy">
+                <svg class="copy-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="9" y="9" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M5 15V5a2 2 0 0 1 2-2h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                <span class="copy-label">Copy</span>
+              </button>
+            </div>
+            <pre><code id="cite-entropy">@article{xie2026rethinking,
   title={Rethinking Entropy Allocation in LLM-based ASR: Understanding the Dynamics between Speech Encoders and LLMs},
   author={Xie, Yuan and Song, Jiaqi and Qiu, Guang and Wang, Xianliang and Lei, Ming and Gao, Jie and Wu, Jie},
   journal={arXiv preprint arXiv:2604.08003},
   year={2026}
 }</code></pre>
+          </article>
+          <article class="citation-block">
+            <div class="citation-head">
+              <span class="citation-label">NIM4-ASR</span>
+              <button type="button" class="copy-button" data-copy-target="cite-nim4">
+                <svg class="copy-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="9" y="9" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M5 15V5a2 2 0 0 1 2-2h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                <span class="copy-label">Copy</span>
+              </button>
+            </div>
+            <pre><code id="cite-nim4">@article{xie2026nim4,
+  title={NIM4-ASR: Towards Efficient, Robust, and Customizable Real-Time LLM-Based ASR},
+  author={Xie, Yuan and Song, Jiaqi and Qiu, Guang and Wang, Xianliang and Qiao, Kai and Yuan, Junfeng and Liu, Shengqing and Zhang, Yi and Chen, Bowen and Lei, Ming and others},
+  journal={arXiv preprint arXiv:2604.18105},
+  year={2026}
+}</code></pre>
+          </article>
+        </div>
       </section>
     </main>
 
     <footer>
-      <span>Advanced Intelligent Systems Group, NIO</span>
-      <a href="#top">Back to top</a>
+      <div class="footer-inner">
+        <div class="footer-org">
+          <span class="footer-group">Advanced Intelligent Systems Group, NIO</span>
+          <p class="footer-copy">
+            © 2026 NIM4-ASR. All rights reserved.
+            <a href="https://www.nio.com" target="_blank" rel="noreferrer">NIO Inc.</a>
+          </p>
+        </div>
+        <a class="footer-top" href="#top">Back to top ↑</a>
+      </div>
     </footer>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+      <button type="button" class="lightbox-close" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="lightbox-stage" id="lightbox-stage"></div>
+    </div>
+
+    <script>
+      (function () {
+        var docEl = document.documentElement;
+        docEl.classList.add("js");
+        var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        /* ---------- Sticky header shadow on scroll ---------- */
+        var topbar = document.querySelector(".topbar");
+        var onScroll = function () {
+          if (topbar) topbar.classList.toggle("scrolled", window.scrollY > 8);
+        };
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+
+        /* ---------- Scroll-reveal animations ---------- */
+        var revealTargets = document.querySelectorAll(
+          ".hero-copy, .core-panel, .figure-card, .table-card, .demo-subsection, .split > div, .method-note, .citation-block, .section-head"
+        );
+        if (reduceMotion || !("IntersectionObserver" in window)) {
+          revealTargets.forEach(function (el) { el.classList.add("revealed"); });
+        } else {
+          revealTargets.forEach(function (el, i) {
+            el.classList.add("reveal");
+            el.style.setProperty("--reveal-delay", (i % 3) * 70 + "ms");
+          });
+          var io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("revealed");
+                  io.unobserve(entry.target);
+                }
+              });
+            },
+            { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+          );
+          revealTargets.forEach(function (el) { io.observe(el); });
+        }
+
+        /* ---------- Copy buttons for citations ---------- */
+        document.querySelectorAll(".copy-button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var target = document.getElementById(btn.getAttribute("data-copy-target"));
+            if (!target) return;
+            var text = target.textContent;
+            var done = function () {
+              btn.classList.add("copied");
+              var label = btn.querySelector(".copy-label");
+              var prev = label ? label.textContent : "";
+              if (label) label.textContent = "Copied";
+              setTimeout(function () {
+                btn.classList.remove("copied");
+                if (label) label.textContent = prev;
+              }, 1600);
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(text).then(done, done);
+            } else {
+              var ta = document.createElement("textarea");
+              ta.value = text;
+              ta.style.position = "fixed";
+              ta.style.opacity = "0";
+              document.body.appendChild(ta);
+              ta.select();
+              try { document.execCommand("copy"); } catch (e) {}
+              document.body.removeChild(ta);
+              done();
+            }
+          });
+        });
+
+        /* ---------- Lightbox for figures and demo videos ---------- */
+        var lightbox = document.getElementById("lightbox");
+        var stage = document.getElementById("lightbox-stage");
+        var closeBtn = lightbox.querySelector(".lightbox-close");
+
+        function openLightbox(node) {
+          stage.innerHTML = "";
+          stage.appendChild(node);
+          lightbox.classList.add("open");
+          lightbox.setAttribute("aria-hidden", "false");
+          docEl.classList.add("lightbox-open");
+        }
+        function closeLightbox() {
+          lightbox.classList.remove("open");
+          lightbox.setAttribute("aria-hidden", "true");
+          docEl.classList.remove("lightbox-open");
+          setTimeout(function () { stage.innerHTML = ""; }, 250);
+        }
+        closeBtn.addEventListener("click", closeLightbox);
+        lightbox.addEventListener("click", function (e) {
+          if (e.target === lightbox || e.target === stage) closeLightbox();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && lightbox.classList.contains("open")) closeLightbox();
+        });
+
+        var expandSvg =
+          '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
+          '<path d="M9 3H4a1 1 0 0 0-1 1v5M15 3h5a1 1 0 0 1 1 1v5M21 15v5a1 1 0 0 1-1 1h-5M3 15v5a1 1 0 0 0 1 1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
+          "</svg>";
+
+        // Figure images: click image (or its expand button) to zoom
+        document.querySelectorAll(".figure-card img").forEach(function (img) {
+          var card = img.closest(".figure-card");
+          if (card) card.classList.add("zoomable");
+          var open = function () {
+            var big = new Image();
+            big.src = img.currentSrc || img.src;
+            big.alt = img.alt || "";
+            big.className = "lightbox-img";
+            openLightbox(big);
+          };
+          img.addEventListener("click", open);
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "zoom-btn";
+          btn.setAttribute("aria-label", "Enlarge image");
+          btn.innerHTML = expandSvg;
+          btn.addEventListener("click", function (e) { e.stopPropagation(); open(); });
+          if (card) card.appendChild(btn);
+        });
+
+        // Demo videos: dedicated expand button opens an enlarged player
+        document.querySelectorAll(".demo-video-card").forEach(function (card) {
+          var video = card.querySelector("video");
+          if (!video) return;
+          card.classList.add("zoomable");
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "zoom-btn";
+          btn.setAttribute("aria-label", "Enlarge video");
+          btn.innerHTML = expandSvg;
+          btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            var big = document.createElement("video");
+            big.className = "lightbox-video";
+            big.controls = true;
+            big.playsInline = true;
+            big.autoplay = true;
+            if (video.getAttribute("poster")) big.setAttribute("poster", video.getAttribute("poster"));
+            big.src = video.currentSrc || video.src;
+            openLightbox(big);
+          });
+          card.appendChild(btn);
+        });
+      })();
+    </script>
   </body>
 </html>
