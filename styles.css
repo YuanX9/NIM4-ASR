@@ -239,6 +239,20 @@ h3 {
   display: block;
 }
 
+.button .btn-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+}
+
+.button .btn-sub {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  opacity: 0.72;
+}
+
 .button.primary {
   border-color: #1f3f70;
   background-image: linear-gradient(135deg, #275089 0%, #1c3a68 100%);
@@ -490,6 +504,16 @@ h2.section-subtitle {
   justify-content: center;
   gap: clamp(40px, 6vw, 84px);
   background: #ffffff;
+}
+
+/* In-section divider: a short centered line instead of the full-width
+   section rule, since this block continues the Method section above. */
+.section.is-subsection {
+  border-top: 0;
+  background-image: linear-gradient(var(--line), var(--line));
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 72px 2px;
 }
 
 .results-layout {
