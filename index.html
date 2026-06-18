@@ -8,12 +8,19 @@
       content="NIM4-ASR project page: efficient, robust, and customizable real-time LLM-based ASR."
     />
     <title>NIM4-ASR</title>
-    <link rel="stylesheet" href="./styles.css?v=20260618-5" />
+    <link rel="stylesheet" href="./styles.css?v=20260618-6" />
   </head>
   <body>
     <header class="topbar">
       <a class="brand" href="#top" aria-label="NIM4-ASR home">
-        <img src="./assets/nio-logo-cropped.png" alt="NIO" />
+        <img
+          src="./assets/nio-logo.webp"
+          alt="NIO"
+          width="528"
+          height="200"
+          decoding="async"
+          fetchpriority="high"
+        />
         <span>NIM4-ASR</span>
       </a>
       <nav aria-label="Page sections">
@@ -71,11 +78,25 @@
           </p>
           <div class="demo-video-grid">
             <figure class="demo-video-card">
-              <video class="demo-video" controls preload="metadata" playsinline src="./videos/b700d5616fb27da4247c406430aa8bd8_with_audio.mp4"></video>
+              <video
+                class="demo-video"
+                controls
+                preload="none"
+                playsinline
+                poster="./assets/posters/b700d5616fb27da4247c406430aa8bd8_with_audio.jpg"
+                src="./videos/b700d5616fb27da4247c406430aa8bd8_with_audio.mp4"
+              ></video>
               <figcaption>Sports commentary. The model can leverage semantic context to correct the streaming partial result from "那时" to "纳什".</figcaption>
             </figure>
             <figure class="demo-video-card">
-              <video class="demo-video" controls preload="metadata" playsinline src="./videos/948f4f86274f73a4952e116a7d00c782_with_audio.mp4"></video>
+              <video
+                class="demo-video"
+                controls
+                preload="none"
+                playsinline
+                poster="./assets/posters/948f4f86274f73a4952e116a7d00c782_with_audio.jpg"
+                src="./videos/948f4f86274f73a4952e116a7d00c782_with_audio.mp4"
+              ></video>
               <figcaption>Automotive safety terminology. We provide streaming punctuation insertion to improve the readability of real-time transcriptions.</figcaption>
             </figure>
           </div>
@@ -91,11 +112,25 @@
           </p>
           <div class="demo-video-grid">
             <figure class="demo-video-card">
-              <video class="demo-video" controls preload="metadata" playsinline src="./videos/cos-da00cb2df78235bd4902f21fcb78789b_no_a_prefix.mp4"></video>
+              <video
+                class="demo-video"
+                controls
+                preload="none"
+                playsinline
+                poster="./assets/posters/cos-da00cb2df78235bd4902f21fcb78789b_no_a_prefix.jpg"
+                src="./videos/cos-da00cb2df78235bd4902f21fcb78789b_no_a_prefix.mp4"
+              ></video>
               <figcaption>Location-aware hotwords. Real-time hotword biasing corrects "彗新" to "惠新".</figcaption>
             </figure>
             <figure class="demo-video-card">
-              <video class="demo-video" controls preload="metadata" playsinline src="./videos/cos-ff58118704db26e535c86ed1b8844577_no_a_prefix.mp4"></video>
+              <video
+                class="demo-video"
+                controls
+                preload="none"
+                playsinline
+                poster="./assets/posters/cos-ff58118704db26e535c86ed1b8844577_no_a_prefix.jpg"
+                src="./videos/cos-ff58118704db26e535c86ed1b8844577_no_a_prefix.mp4"
+              ></video>
               <figcaption>Celebrity-aware hotwords.</figcaption>
             </figure>
           </div>
@@ -127,8 +162,8 @@
                     <audio
                       class="demo-audio"
                       controls
-                      preload="metadata"
-                      src="./wavs/中文-voice_in_the_wild_bench-这个快捷键不顺手换一个组合.wav"
+                      preload="none"
+                      src="./audio/中文-voice_in_the_wild_bench-这个快捷键不顺手换一个组合.mp3"
                     ></audio>
                   </td>
                   <td>这个快捷键不顺手换一个组合</td>
@@ -146,8 +181,8 @@
                     <audio
                       class="demo-audio"
                       controls
-                      preload="metadata"
-                      src="./wavs/中文-aishell_2021c-减弱音量到八十九.wav"
+                      preload="none"
+                      src="./audio/中文-aishell_2021c-减弱音量到八十九.mp3"
                     ></audio>
                   </td>
                   <td>减弱音量到八十九</td>
@@ -165,8 +200,8 @@
                     <audio
                       class="demo-audio"
                       controls
-                      preload="metadata"
-                      src="./wavs/中文-aishell_2021c-音量第七格.wav"
+                      preload="none"
+                      src="./audio/中文-aishell_2021c-音量第七格.mp3"
                     ></audio>
                   </td>
                   <td>音量第七格</td>
@@ -184,8 +219,8 @@
                     <audio
                       class="demo-audio"
                       controls
-                      preload="metadata"
-                      src="./wavs/中文-SPEECHIO_ASR_ZH00020-而纳什也在六年拿到自己第二个MVP.wav"
+                      preload="none"
+                      src="./audio/中文-SPEECHIO_ASR_ZH00020-而纳什也在六年拿到自己第二个MVP.mp3"
                     ></audio>
                   </td>
                   <td>而纳什也在零六年拿到自己第二个MVP奖杯并且是连庄MVP</td>
@@ -203,8 +238,8 @@
                     <audio
                       class="demo-audio"
                       controls
-                      preload="metadata"
-                      src="./wavs/中文-SPEECHIO_ASR_ZH00021-主动刹车车道偏离预警车道保持系统包括它还有DSC.wav"
+                      preload="none"
+                      src="./audio/中文-SPEECHIO_ASR_ZH00021-主动刹车车道偏离预警车道保持系统包括它还有DSC.mp3"
                     ></audio>
                   </td>
                   <td>主动刹车车道偏离预警车道保持系统包括它还有DSC车身稳定控制系统这些全部都是全系标配的所以安全配置表现还不错</td>
@@ -243,8 +278,8 @@
                     <audio
                       class="demo-audio"
                       controls
-                      preload="metadata"
-                      src="./wavs/EN-cs_dialogue-YEAH_I_WATCHED_THE_MOVIE_FOR_TWICE_TWICE.wav"
+                      preload="none"
+                      src="./audio/EN-cs_dialogue-YEAH_I_WATCHED_THE_MOVIE_FOR_TWICE_TWICE.mp3"
                     ></audio>
                   </td>
                   <td>YEAH I WATCHED THE MOVIE FOR TWICE TWICE AND MY MY BEST FRIENDS HAVE WATCHED FROM NINE NINE THE NINE TIMES OH MY GOD AND IM SO SHOCK RIGHT NOW IT IS INCREDIBLY HES YEAH HES THE BIG HES THE BIG FAN OF TAYLOR SWIFT</td>
@@ -262,8 +297,8 @@
                     <audio
                       class="demo-audio"
                       controls
-                      preload="metadata"
-                      src="./wavs/EN-librispeech_test_other-LUKE_TOOK_CARE_OF_MISTER_LARKINS_DOGS_AND_GROOMED_MISTER.wav"
+                      preload="none"
+                      src="./audio/EN-librispeech_test_other-LUKE_TOOK_CARE_OF_MISTER_LARKINS_DOGS_AND_GROOMED_MISTER.mp3"
                     ></audio>
                   </td>
                   <td>LUKE TOOK CARE OF MISTER LARKINS DOGS AND GROOMED MISTER WYLDERS HORSE AND CLEANED UP HIS DOG CART FOR MARK BEING CLOSE ABOUT MONEY AND FINDING THAT THE THING WAS TO BE DONE MORE CHEAPLY THAT WAY PUT UP HIS HORSE AND DOG CART IN THE POST OFFICE PREMISES AND SO EVADED THE LIVERY CHARGES OF THE BRANDON ARMS</td>
@@ -281,8 +316,8 @@
                     <audio
                       class="demo-audio"
                       controls
-                      preload="metadata"
-                      src="./wavs/EN-voice_in_the_wild_bench-I_NEED_TO_REVIEW_THE_BUDGET_AGAIN_BEFORE_APPROVING_THE_PURCHASE_REQUEST.wav"
+                      preload="none"
+                      src="./audio/EN-voice_in_the_wild_bench-I_NEED_TO_REVIEW_THE_BUDGET_AGAIN_BEFORE_APPROVING_THE_PURCHASE_REQUEST.mp3"
                     ></audio>
                   </td>
                   <td>I NEED TO REVIEW THE BUDGET AGAIN BEFORE APPROVING THE PURCHASE REQUEST</td>
@@ -321,8 +356,8 @@
                     <audio
                       class="demo-audio"
                       controls
-                      preload="metadata"
-                      src="./wavs/CS-ascend-平时就是我们做PRE的时候他们尽量就是.wav"
+                      preload="none"
+                      src="./audio/CS-ascend-平时就是我们做PRE的时候他们尽量就是.mp3"
                     ></audio>
                   </td>
                   <td>平时就是我们做PRE的时候他们尽量就是</td>
@@ -340,8 +375,8 @@
                     <audio
                       class="demo-audio"
                       controls
-                      preload="metadata"
-                      src="./wavs/CS-cs_dialogue-好的OF_COURSE.wav"
+                      preload="none"
+                      src="./audio/CS-cs_dialogue-好的OF_COURSE.mp3"
                     ></audio>
                   </td>
                   <td>好的OF COURSE</td>
@@ -380,8 +415,8 @@
                     <audio
                       class="demo-audio"
                       controls
-                      preload="metadata"
-                      src="./wavs/幻觉-恋人间的默契像是无声的语言相视一笑便懂.wav"
+                      preload="none"
+                      src="./audio/幻觉-恋人间的默契像是无声的语言相视一笑便懂.mp3"
                     ></audio>
                   </td>
                   <td>恋人间的默契像是无声的语言相视一笑便懂</td>
@@ -399,8 +434,8 @@
                     <audio
                       class="demo-audio"
                       controls
-                      preload="metadata"
-                      src="./wavs/幻觉-在工作与生活之间找到平衡是一门深奥的艺术.wav"
+                      preload="none"
+                      src="./audio/幻觉-在工作与生活之间找到平衡是一门深奥的艺术.mp3"
                     ></audio>
                   </td>
                   <td>在工作与生活之间找到平衡是一门深奥的艺术</td>
@@ -425,7 +460,14 @@
         </div>
         <div class="figure-grid">
           <article class="figure-card">
-            <img src="./assets/fig1-architecture.png" alt="NIM4-ASR architecture diagram" />
+            <img
+              src="./assets/fig1-architecture.webp"
+              alt="NIM4-ASR architecture diagram"
+              width="1800"
+              height="727"
+              loading="lazy"
+              decoding="async"
+            />
             <h3>Modular ASR Architecture</h3>
             <p>
               The architecture comprises a streaming Conformer encoder, a two-layer speech adaptor, a phoneme-level CTC head with a RAG module, 
@@ -433,7 +475,14 @@
             </p>
           </article>
           <article class="figure-card">
-            <img src="./assets/fig2-training.png" alt="NIM4-ASR training pipeline diagram" />
+            <img
+              src="./assets/fig2-training.webp"
+              alt="NIM4-ASR training pipeline diagram"
+              width="1800"
+              height="1012"
+              loading="lazy"
+              decoding="async"
+            />
             <h3>Role-Aligned Training</h3>
             <p>
               Training consists of CR-CTC pretraining, alignment, CKA-triggered IA-SFT, late-stage joint SFT, context SFT, 

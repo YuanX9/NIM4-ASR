@@ -248,6 +248,15 @@ h3 {
   margin-right: auto;
 }
 
+.demo-comparison,
+#method,
+.split,
+#results,
+#citation {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
 .split > div > p:not(.section-subtitle) {
   max-width: 980px;
   margin: 16px 0 0;

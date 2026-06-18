@@ -11,7 +11,9 @@ Open `index.html` directly in a browser to preview. No build step or local serve
 - `index.html`: concise project-page content
 - `styles.css`: responsive styling
 - `assets/nim4-asr-paper.pdf`: local paper PDF
-- `assets/fig1-architecture.png`: model architecture figure
-- `assets/fig2-training.png`: training pipeline figure
-- `assets/nio-logo-cropped.png`: page logo
-- `wavs/`: local audio demos used by the Demo tables
+- `assets/fig1-architecture.webp`: optimized model architecture figure
+- `assets/fig2-training.webp`: optimized training pipeline figure
+- `assets/nio-logo.webp`: optimized page logo
+- `assets/posters/`: lightweight video poster images
+- `audio/`: compressed speech demos used by the comparison tables
+- `videos/`: streaming inference demos loaded on demand
