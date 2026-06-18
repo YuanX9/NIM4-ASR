@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="NIM4-ASR project page: efficient, robust, and customizable real-time LLM-based ASR."
+    />
+    <title>NIM4-ASR</title>
+    <link rel="stylesheet" href="./styles.css?v=20260618-5" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="NIM4-ASR home">
+        <img src="./assets/nio-logo-cropped.png" alt="NIO" />
+        <span>NIM4-ASR</span>
+      </a>
+      <nav aria-label="Page sections">
+        <a href="#audio-examples">Demo</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-heading">
+          <p class="project-name">NOMI Intelligence Model 4.0-ASR (NIM4-ASR)</p>
+          <h1>Towards Efficient, Robust, and Customizable Real-Time LLM-Based ASR</h1>
+        </div>
+        <div class="hero-copy">
+          <p class="subtitle">
+            NIM4-ASR is a 2.3B-parameter production-oriented LLM-based ASR framework designed for
+            low-latency streaming speech recognition, robustness against hallucinations, and million-scale
+            hotword customization.
+          </p>
+          <p class="authors">
+            Yuan Xie*, Jiaqi Song*, Guang Qiu, Xianliang Wang, Kai Qiao, Junfeng Yuan,
+            Shengqing Liu, Yi Zhang, Bowen Chen, Ming Lei, Jie Gao, Jie Wu
+          </p>
+          <div class="actions">
+            <a class="button primary" href="./assets/nim4-asr-paper.pdf">Open PDF</a>
+            <a class="button" href="#citation">Citation</a>
+            <a class="button" href="https://huggingface.co/NIO-LLM" target="_blank" rel="noreferrer">
+              Our paper collection
+            </a>
+          </div>
+        </div>
+        <aside class="core-panel" aria-label="Core Idea">
+          <h2>Core Contributions</h2>
+          <ul>
+            <li><strong>• Efficient design to facilitate model downscaling:</strong> Reduces the modality tax for a 2.3B LLM-based ASR model.</li>
+            <li><strong>• Stable acoustic grounding to mitigate hallucination:</strong> Preserves acoustic fidelity by CR-CTC pretraining and IA-SFT.</li>
+            <li><strong>• Production-oriented optimization for deployment:</strong> Supports streaming inference and scalable hotword customization.</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="audio-examples" class="section">
+        <div class="section-head">
+          <h2>Demo</h2>
+        </div>
+        <div class="demo-subsection">
+          <h3>Streaming Inference</h3>
+          <p class="demo-subsection-description">
+            This demo illustrates streaming inference with real-time punctuation
+            insertion, followed by a full-context second-pass LLM decoding update once 
+            all streaming chunks have been received.
+          </p>
+          <div class="demo-video-grid">
+            <figure class="demo-video-card">
+              <video class="demo-video" controls preload="metadata" playsinline src="./videos/b700d5616fb27da4247c406430aa8bd8_with_audio.mp4"></video>
+              <figcaption>Sports commentary. The model can leverage semantic context to correct the streaming partial result from "那时" to "纳什".</figcaption>
+            </figure>
+            <figure class="demo-video-card">
+              <video class="demo-video" controls preload="metadata" playsinline src="./videos/948f4f86274f73a4952e116a7d00c782_with_audio.mp4"></video>
+              <figcaption>Automotive safety terminology. We provide streaming punctuation insertion to improve the readability of real-time transcriptions.</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="demo-subsection">
+          <h3>Streaming Inference with Online Hotword Customization</h3>
+          <p class="demo-subsection-description">
+            This demo illustrates streaming inference with online hotword retrieval and biasing:
+            hotwords are retrieved on-the-fly and injected into the decoding context
+            in real time. Our hotword customization module does not require hotwords to be manually specified — 
+            they can instead be retrieved automatically from a large-scale database via phoneme-based RAG.
+          </p>
+          <div class="demo-video-grid">
+            <figure class="demo-video-card">
+              <video class="demo-video" controls preload="metadata" playsinline src="./videos/cos-da00cb2df78235bd4902f21fcb78789b_no_a_prefix.mp4"></video>
+              <figcaption>Location-aware hotwords. Real-time hotword biasing corrects "彗新" to "惠新".</figcaption>
+            </figure>
+            <figure class="demo-video-card">
+              <video class="demo-video" controls preload="metadata" playsinline src="./videos/cos-ff58118704db26e535c86ed1b8844577_no_a_prefix.mp4"></video>
+              <figcaption>Celebrity-aware hotwords.</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="demo-subsection demo-comparison">
+          <h3>Comparison with Leading Open-Source LLM-ASR Models</h3>
+          <article class="table-card demo-card">
+            <h3>Chinese</h3>
+            <div class="table-scroll">
+              <table class="demo-table">
+              <thead>
+                <tr>
+                  <th>Speech Clip</th>
+                  <th>Ground Truth<br /><span>reference transcription</span></th>
+                  <th>Our NIM4-ASR<br /><span>(streaming)</span></th>
+                  <th>Fun-ASR<br /><span>Nano-2512</span></th>
+                  <th>Qwen3-ASR<br /><span>1.7B</span></th>
+                  <th>FireRedASR2S<br /><span>LLM</span></th>
+                  <th>Step-Audio2<br /><span>Mini</span></th>
+                  <th>Qwen3-Omni<br /><span>30B-A3B Instruct</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>vitw_00426</strong>
+                    <span class="challenge-source">(voice_in_the_wild_bench)</span>
+                    <audio
+                      class="demo-audio"
+                      controls
+                      preload="metadata"
+                      src="./wavs/中文-voice_in_the_wild_bench-这个快捷键不顺手换一个组合.wav"
+                    ></audio>
+                  </td>
+                  <td>这个快捷键不顺手换一个组合</td>
+                  <td class="transcript-cell"><span class="metric best">CER 0.00</span>这个快捷键不顺手换一个组合</td>
+                  <td class="transcript-cell"><span class="metric cer-2308">CER 23.08</span>这<span class="diff-text">种</span>快捷键不<span class="diff-text">熟</span>换一个组合</td>
+                  <td class="transcript-cell"><span class="metric cer-1538">CER 15.38</span>这个快捷键不<span class="diff-text">熟</span>换一个组合</td>
+                  <td class="transcript-cell"><span class="metric cer-1538">CER 15.38</span>这个快捷键不<span class="diff-text">熟</span>换一个组合</td>
+                  <td class="transcript-cell"><span class="metric cer-0769">CER 7.69</span>这个快捷键不<span class="diff-text">是</span>手换一个组合</td>
+                  <td class="transcript-cell"><span class="metric cer-0769">CER 7.69</span>这个快捷键不<span class="diff-text">是</span>手换一个组合</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>A1109CO0001</strong>
+                    <span class="challenge-source">(aishell_2021c)</span>
+                    <audio
+                      class="demo-audio"
+                      controls
+                      preload="metadata"
+                      src="./wavs/中文-aishell_2021c-减弱音量到八十九.wav"
+                    ></audio>
+                  </td>
+                  <td>减弱音量到八十九</td>
+                  <td class="transcript-cell"><span class="metric best">CER 0.00</span>减弱音量到八十九</td>
+                  <td class="transcript-cell"><span class="metric cer-5000">CER 50.00</span><span class="diff-text">紧罗一样</span>到八十九</td>
+                  <td class="transcript-cell"><span class="metric cer-5000">CER 50.00</span><span class="diff-text">锦罗一样</span>到八十九</td>
+                  <td class="transcript-cell"><span class="metric cer-5000">CER 50.00</span><span class="diff-text">简罗一样</span>到八十九</td>
+                  <td class="transcript-cell"><span class="metric cer-3750">CER 37.50</span>减<span class="diff-text">了一样</span>到八十九</td>
+                  <td class="transcript-cell"><span class="metric cer-5000">CER 50.00</span><span class="diff-text">捡一辆</span>到八十九</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>A1123CO0001</strong>
+                    <span class="challenge-source">(aishell_2021c)</span>
+                    <audio
+                      class="demo-audio"
+                      controls
+                      preload="metadata"
+                      src="./wavs/中文-aishell_2021c-音量第七格.wav"
+                    ></audio>
+                  </td>
+                  <td>音量第七格</td>
+                  <td class="transcript-cell"><span class="metric best">CER 0.00</span>音量第七格</td>
+                  <td class="transcript-cell"><span class="metric cer-6000">CER 60.00</span>音量<span class="diff-text">贴贴狗</span></td>
+                  <td class="transcript-cell"><span class="metric cer-10000">CER 100.00</span><span class="diff-text">听听歌</span></td>
+                  <td class="transcript-cell"><span class="metric cer-10000">CER 100.00</span><span class="diff-text">晶亮贴贴狗</span></td>
+                  <td class="transcript-cell"><span class="metric cer-14000">CER &gt;100</span><span class="diff-text">你们二个天天搞</span></td>
+                  <td class="transcript-cell"><span class="metric cer-10000">CER 100.00</span><span class="diff-text">你有踢踢过</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>9uELWl5vOJM_0093</strong>
+                    <span class="challenge-source">(SPEECHIO_ASR_ZH00020)</span>
+                    <audio
+                      class="demo-audio"
+                      controls
+                      preload="metadata"
+                      src="./wavs/中文-SPEECHIO_ASR_ZH00020-而纳什也在六年拿到自己第二个MVP.wav"
+                    ></audio>
+                  </td>
+                  <td>而纳什也在零六年拿到自己第二个MVP奖杯并且是连庄MVP</td>
+                  <td class="transcript-cell"><span class="metric best">CER 0.00</span>而纳什也在零六年拿到自己第二个MVP奖杯并且是连庄MVP</td>
+                  <td class="transcript-cell"><span class="metric cer-3333">CER 33.33</span>而<span class="diff-text">那时</span>也在零六年拿到自己第二个MVP奖杯并且是连<span class="diff-text">装</span>MVP</td>
+                  <td class="transcript-cell"><span class="metric cer-2963">CER 29.63</span>而<span class="diff-text">那时</span>也在零六年拿到自己第二个MVP奖杯并且是连庄MVP</td>
+                  <td class="transcript-cell"><span class="metric cer-2963">CER 29.63</span>而<span class="diff-text">那时</span>也在零六年拿到自己第二个MVP奖杯并且是连庄MVP</td>
+                  <td class="transcript-cell"><span class="metric cer-3333">CER 33.33</span>而<span class="diff-text">那时</span>也在零六年拿到自己第二个MVP奖杯并且是连<span class="diff-text">装</span>MVP</td>
+                  <td class="transcript-cell"><span class="metric cer-2963">CER 29.63</span>而<span class="diff-text">那时</span>也在零六年拿到自己第二个MVP奖杯并且是连庄MVP</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>ZFWalpHS0wg_0035</strong>
+                    <span class="challenge-source">(SPEECHIO_ASR_ZH00021)</span>
+                    <audio
+                      class="demo-audio"
+                      controls
+                      preload="metadata"
+                      src="./wavs/中文-SPEECHIO_ASR_ZH00021-主动刹车车道偏离预警车道保持系统包括它还有DSC.wav"
+                    ></audio>
+                  </td>
+                  <td>主动刹车车道偏离预警车道保持系统包括它还有DSC车身稳定控制系统这些全部都是全系标配的所以安全配置表现还不错</td>
+                  <td class="transcript-cell"><span class="metric best">CER 0.00</span>主动刹车车道偏离预警车道保持系统包括它还有DSC车身稳定控制系统这些全部都是全系标配的所以安全配置表现还不错</td>
+                  <td class="transcript-cell"><span class="metric cer-0370">CER 3.70</span>主动刹车车道偏离预警车道保持系统包括它还有<span class="diff-text">DSA</span>车身稳定控制系统这些全部都是全系标配的所以<span class="diff-text">安心</span>配置表现还不错</td>
+                  <td class="transcript-cell"><span class="metric cer-0556">CER 5.56</span>主动刹车车道偏离预警车道保持系统包括它还有<span class="diff-text">ESC</span>车身稳定控制系统这些全部都是全系标配的所以安全配置表现还不错</td>
+                  <td class="transcript-cell"><span class="metric cer-0556">CER 5.56</span>主动刹车车道偏离预警车道保持系统包括它还有<span class="diff-text">ESC</span>车身稳定控制系统这些全部都是全系标配的所以安全配置表现还不错</td>
+                  <td class="transcript-cell"><span class="metric cer-0556">CER 5.56</span>主动刹车车道偏离预警车道保持系统包括它还有<span class="diff-text">DSI</span>车身稳定控制系统这些全部都是全系标配的所以安全配置表现还不错</td>
+                  <td class="transcript-cell"><span class="metric cer-0185">CER 1.85</span>主动刹车车道偏离预警车道保持系统包括它还有<span class="diff-text">ESC</span>车身稳定控制系统这些全部都是全系标配的所以安全配置表现还不错</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          </article>
+          <article class="table-card demo-card">
+            <h3>English</h3>
+            <div class="table-scroll">
+              <table class="demo-table">
+              <thead>
+                <tr>
+                  <th>Speech Clip</th>
+                  <th>Ground Truth<br /><span>reference transcription</span></th>
+                  <th>Our NIM4-ASR<br /><span>(streaming)</span></th>
+                  <th>Fun-ASR<br /><span>Nano-2512</span></th>
+                  <th>Qwen3-ASR<br /><span>1.7B</span></th>
+                  <th>FireRedASR2S<br /><span>LLM</span></th>
+                  <th>Step-Audio2<br /><span>Mini</span></th>
+                  <th>Qwen3-Omni<br /><span>30B-A3B Instruct</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>ZH-CN_U0061_S0_153</strong>
+                    <span class="challenge-source">(cs_dialogue)</span>
+                    <audio
+                      class="demo-audio"
+                      controls
+                      preload="metadata"
+                      src="./wavs/EN-cs_dialogue-YEAH_I_WATCHED_THE_MOVIE_FOR_TWICE_TWICE.wav"
+                    ></audio>
+                  </td>
+                  <td>YEAH I WATCHED THE MOVIE FOR TWICE TWICE AND MY MY BEST FRIENDS HAVE WATCHED FROM NINE NINE THE NINE TIMES OH MY GOD AND IM SO SHOCK RIGHT NOW IT IS INCREDIBLY HES YEAH HES THE BIG HES THE BIG FAN OF TAYLOR SWIFT</td>
+                  <td class="transcript-cell"><span class="metric best">WER 8.89</span>YEAH I WATCHED THE MOVIE FOR TWICE TWICE AND MY MY BEST FRIENDS HAVE WATCHED <span class="diff-text">IT FOR</span> NINE NINE THE NINE TIMES OH MY GOD AND IM SO <span class="diff-text">SHOCKED</span> RIGHT NOW IT IS INCREDIBLY HES YEAH HES THE <span class="diff-text">BIGGEST</span> HES THE BIG FAN OF TAYLOR SWIFT</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 22.22</span>YEAH I WATCHED THE MOVIE FOR TWICE TWICE AND MY MY BEST FRIENDS HAVE WATCHED <span class="diff-text">IT FOR</span> NINE NINE THE NINE TIMES OH MY GOD <span class="diff-text omission-mark">__</span> IM SO <span class="diff-text">SHOCKED</span> RIGHT NOW <span class="diff-text">IT IT IT</span> INCREDIBLY HES <span class="diff-text">A</span> YEAH HES THE <span class="diff-text">BIGGEST</span> HES THE BIG FAN OF <span class="diff-text">TAKERS WITH</span></td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 17.78</span>YEAH I WATCHED THE MOVIE FOR TWICE TWICE AND MY MY BEST FRIENDS HAVE WATCHED <span class="diff-text">IT FOR</span> NINE NINE <span class="diff-text omission-mark">__</span> NINE TIMES OH MY GOD <span class="diff-text omission-mark">__</span> IM SO <span class="diff-text">SHOCKED</span> RIGHT NOW IT IT IS INCREDIBLY HES <span class="diff-text">A</span> YEAH HES THE <span class="diff-text">BIGGEST</span> HES THE BIG FAN OF TAYLOR SWIFT</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 15.56</span>YEAH I WATCHED THE MOVIE FOR TWICE TWICE AND MY MY BEST FRIENDS HAVE WATCHED <span class="diff-text">IT</span> FROM NINE NINE THE NINE TIMES OH MY GOD <span class="diff-text">IS</span> IM SO <span class="diff-text">SHOCKED</span> RIGHT NOW IT <span class="diff-text">IT IT</span> IS INCREDIBLY HES <span class="diff-text">A</span> YEAH HES THE <span class="diff-text">BIGGEST</span> HES THE BIG FAN OF TAYLOR SWIFT</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 17.78</span>YEAH I WATCHED THE MOVIE FOR TWICE TWICE AND MY MY BEST FRIENDS HAVE WATCHED <span class="diff-text">IT FOR</span> NINE NINE THE NINE TIMES OH MY GOD <span class="diff-text omission-mark">__</span> IM SO <span class="diff-text">SHOCKED</span> RIGHT NOW IT <span class="diff-text">IT ITS</span> INCREDIBLY HES <span class="diff-text">A</span> YEAH HES THE <span class="diff-text">BIGGEST</span> HES THE BIG FAN OF TAYLOR SWIFT</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 44.44</span><span class="diff-text">YES</span> I WATCHED THE MOVIE <span class="diff-text omission-mark">__</span> TWICE AND MY <span class="diff-text omission-mark">__</span> BEST FRIEND <span class="diff-text">HAS</span> WATCHED <span class="diff-text">IT</span> NINE TIMES OH MY GOD <span class="diff-text omission-mark">__</span> IM SO <span class="diff-text">SHOCKED</span> RIGHT NOW <span class="diff-text omission-mark">__</span> INCREDIBLY HES <span class="diff-text omission-mark">__</span> THE <span class="diff-text">BIGGEST</span> FAN OF TAYLOR SWIFT</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>5442-32873-00140000009853</strong>
+                    <span class="challenge-source">(librispeech_test_other)</span>
+                    <audio
+                      class="demo-audio"
+                      controls
+                      preload="metadata"
+                      src="./wavs/EN-librispeech_test_other-LUKE_TOOK_CARE_OF_MISTER_LARKINS_DOGS_AND_GROOMED_MISTER.wav"
+                    ></audio>
+                  </td>
+                  <td>LUKE TOOK CARE OF MISTER LARKINS DOGS AND GROOMED MISTER WYLDERS HORSE AND CLEANED UP HIS DOG CART FOR MARK BEING CLOSE ABOUT MONEY AND FINDING THAT THE THING WAS TO BE DONE MORE CHEAPLY THAT WAY PUT UP HIS HORSE AND DOG CART IN THE POST OFFICE PREMISES AND SO EVADED THE LIVERY CHARGES OF THE BRANDON ARMS</td>
+                  <td class="transcript-cell"><span class="metric best">WER 1.69</span>LUKE TOOK CARE OF MISTER LARKINS DOGS AND GROOMED MISTER <span class="diff-text">WILDERS</span> HORSE AND CLEANED UP HIS DOG CART FOR MARK BEING CLOSE ABOUT MONEY AND FINDING THAT THE THING WAS TO BE DONE MORE CHEAPLY THAT WAY PUT UP HIS HORSE AND DOG CART IN THE POST OFFICE PREMISES AND SO EVADED THE LIVERY CHARGES OF THE BRANDON ARMS</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 15.25</span>LUKE TOOK CARE OF MISTER LARKINS DOGS AND GROOMED MISTER WYLDERS HORSE AND CLEANED UP HIS <span class="diff-text">DOGCART</span> FOR <span class="diff-text">MOCK WING CLOTHES</span> ABOUT MONEY AND FINDING THAT THE THING WAS TO BE DONE MORE CHEAPLY THAT WAY PUT UP HIS HORSE AND <span class="diff-text">DOGCART</span> IN THE <span class="diff-text">POSTOFFICE</span> PREMISES AND SO EVADED THE LIVERY CHARGES OF THE BRANDON ARMS</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 5.08</span>LUKE TOOK CARE OF MISTER LARKINS DOGS AND GROOMED MISTER <span class="diff-text">WILDERS</span> HORSE AND CLEANED UP HIS DOG CART FOR MARK BEING CLOSE ABOUT MONEY AND FINDING THAT THE THING WAS TO BE DONE MORE CHEAPLY THAT WAY PUT UP HIS HORSE AND DOG CART IN THE POST OFFICE PREMISES AND SO EVADED THE LIVERY CHARGES OF THE <span class="diff-text">BRAND AND</span> ARMS</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 8.47</span>LUKE TOOK CARE OF MISTER LARKINS DOGS AND GROOMED MISTER <span class="diff-text">WILDERS</span> HORSE AND CLEANED UP HIS <span class="diff-text">DOGCART</span> FOR MARK BEING CLOSE ABOUT MONEY AND FINDING THAT THE THING WAS TO BE DONE MORE CHEAPLY THAT WAY PUT UP HIS HORSE AND <span class="diff-text">DOGCART</span> IN THE POST OFFICE PREMISES AND SO EVADED THE LIVERY CHARGES OF THE BRANDON ARMS</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 8.47</span><span class="diff-text">LUC</span> TOOK CARE OF <span class="diff-text">MR</span> <span class="diff-text">LARKINSS</span> DOGS AND GROOMED <span class="diff-text">MR</span> <span class="diff-text">WILDERS</span> HORSE AND CLEANED UP HIS DOG CART FOR MARK BEING CLOSE ABOUT MONEY AND FINDING THAT THE THING WAS TO BE DONE MORE CHEAPLY THAT WAY PUT UP HIS HORSE AND DOG CART IN THE POST OFFICE PREMISES AND SO EVADED THE LIVERY CHARGES OF THE BRANDON ARMS</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 10.17</span>LUKE TOOK CARE OF MISTER <span class="diff-text">LARKINSS</span> DOGS AND GROOMED MISTER <span class="diff-text">WILDERS</span> HORSE AND CLEANED UP HIS <span class="diff-text">DOGCART</span> FOR MARK BEING CLOSE ABOUT MONEY AND FINDING THAT THE THING WAS TO BE DONE MORE CHEAPLY THAT WAY PUT UP HIS HORSE AND <span class="diff-text">DOGCART</span> IN THE POST OFFICE PREMISES AND SO EVADED THE LIVERY CHARGES OF THE BRANDON ARMS</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>vitw_01998_random_synthetic_en_recording_4841</strong>
+                    <span class="challenge-source">(voice_in_the_wild_bench)</span>
+                    <audio
+                      class="demo-audio"
+                      controls
+                      preload="metadata"
+                      src="./wavs/EN-voice_in_the_wild_bench-I_NEED_TO_REVIEW_THE_BUDGET_AGAIN_BEFORE_APPROVING_THE_PURCHASE_REQUEST.wav"
+                    ></audio>
+                  </td>
+                  <td>I NEED TO REVIEW THE BUDGET AGAIN BEFORE APPROVING THE PURCHASE REQUEST</td>
+                  <td class="transcript-cell"><span class="metric best">WER 0.00</span>I NEED TO REVIEW THE BUDGET AGAIN BEFORE APPROVING THE PURCHASE REQUEST</td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 33.33</span>I NEED TO REVIEW THE BUDGET AGAIN BEFORE APPROVING <span class="diff-text">THEM FOR THE BUDGET MEETING</span></td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 25.00</span>I NEED TO REVIEW THE BUDGET AGAIN <span class="diff-text">FOR</span> APPROVING THE <span class="diff-text">PURCHASES</span></td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 25.00</span>I NEED TO REVIEW THE BUDGET AGAIN BEFORE APPROVING <span class="diff-text">IT</span></td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 8.33</span>I NEED TO REVIEW THE BUDGET AGAIN BEFORE APPROVING THE PURCHASE <span class="diff-text">ORDER</span></td>
+                  <td class="transcript-cell"><span class="metric cer-error">WER 41.67</span>I NEED TO REVIEW THE BUDGET AGAIN <span class="diff-text">FOR UPCOMING DELTA PURCHASES</span></td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          </article>
+          <article class="table-card demo-card">
+            <h3>Mandarin-English Code-switch</h3>
+            <div class="table-scroll">
+              <table class="demo-table">
+              <thead>
+                <tr>
+                  <th>Speech Clip</th>
+                  <th>Ground Truth<br /><span>reference transcription</span></th>
+                  <th>Our NIM4-ASR<br /><span>(streaming)</span></th>
+                  <th>Fun-ASR<br /><span>Nano-2512</span></th>
+                  <th>Qwen3-ASR<br /><span>1.7B</span></th>
+                  <th>FireRedASR2S<br /><span>LLM</span></th>
+                  <th>Step-Audio2<br /><span>Mini</span></th>
+                  <th>Qwen3-Omni<br /><span>30B-A3B Instruct</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>validation-00000-of-00001_00570</strong>
+                    <span class="challenge-source">(ascend)</span>
+                    <audio
+                      class="demo-audio"
+                      controls
+                      preload="metadata"
+                      src="./wavs/CS-ascend-平时就是我们做PRE的时候他们尽量就是.wav"
+                    ></audio>
+                  </td>
+                  <td>平时就是我们做PRE的时候他们尽量就是</td>
+                  <td class="transcript-cell"><span class="metric best">CER 0.00</span>平时就是我们做PRE的时候他们尽量就是</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 5.88</span>平时就是我们做<span class="diff-text">推</span>的时候他们尽量就是</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 5.88</span>平时就是我们做<span class="diff-text">推</span>的时候他们尽量就是</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 5.88</span>平时就是我们做<span class="diff-text">PLAY</span>的时候他们尽量就是</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 5.88</span>平时就是我们做<span class="diff-text">PLAY</span>的时候他们尽量就是</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 5.88</span>平时就是我们做<span class="diff-text">PLAY</span>的时候他们尽量就是</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>ZH-CN_U0018_S0_32</strong>
+                    <span class="challenge-source">(cs_dialogue)</span>
+                    <audio
+                      class="demo-audio"
+                      controls
+                      preload="metadata"
+                      src="./wavs/CS-cs_dialogue-好的OF_COURSE.wav"
+                    ></audio>
+                  </td>
+                  <td>好的OF COURSE</td>
+                  <td class="transcript-cell"><span class="metric best">CER 0.00</span>好的OF COURSE</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 50.00</span><span class="diff-text">HAD THAT</span> OF COURSE</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 50.00</span><span class="diff-text">HADA</span> OF COURSE</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 50.00</span><span class="diff-text">HOW THAT</span> OF COURSE</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER &gt;100</span><span class="diff-text">哈那那那那那那那那那那那那那那那那那那那......</span></td>
+                  <td class="transcript-cell"><span class="metric best">CER 0.00</span>好的OF COURSE</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          </article>
+          <article class="table-card demo-card">
+            <h3>Hallucination-Prone Cases</h3>
+            <div class="table-scroll">
+              <table class="demo-table">
+              <thead>
+                <tr>
+                  <th>Speech Clip</th>
+                  <th>Ground Truth<br /><span>reference transcription</span></th>
+                  <th>Our NIM4-ASR<br /><span>(streaming)</span></th>
+                  <th>Fun-ASR<br /><span>Nano-2512</span></th>
+                  <th>Qwen3-ASR<br /><span>1.7B</span></th>
+                  <th>FireRedASR2S<br /><span>LLM</span></th>
+                  <th>Step-Audio2<br /><span>Mini</span></th>
+                  <th>Qwen3-Omni<br /><span>30B-A3B Instruct</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>whisper_S0189_M-0189-2_014060-014592</strong>
+                    <span class="challenge-source">(aishell_6c)</span>
+                    <audio
+                      class="demo-audio"
+                      controls
+                      preload="metadata"
+                      src="./wavs/幻觉-恋人间的默契像是无声的语言相视一笑便懂.wav"
+                    ></audio>
+                  </td>
+                  <td>恋人间的默契像是无声的语言相视一笑便懂</td>
+                  <td class="transcript-cell"><span class="metric best">CER 5.26</span>恋人间的默契像是无声的语言相<span class="diff-text">识</span>一笑便懂</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 26.32</span>恋人间的默契像是无声的语言<span class="diff-text">像是一小片</span></td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 15.79</span><span class="diff-text">猎</span>人间的默契像是无声的语言<span class="diff-text">像是</span>一笑便懂</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER &gt;100</span><span class="diff-text">阿弥陀佛阿弥陀佛阿弥陀佛阿弥陀佛阿弥陀佛阿弥陀佛阿弥陀佛......</span></td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 26.32</span>恋人间的默契像是无声的语言<span class="diff-text">像是一小片毒</span></td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER &gt;100</span><span class="diff-text">在美丽的湖边划一只小船享受着自然的亲密接触</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>whisper_S0189_M-0189-2_099060-099700</strong>
+                    <span class="challenge-source">(aishell_6c)</span>
+                    <audio
+                      class="demo-audio"
+                      controls
+                      preload="metadata"
+                      src="./wavs/幻觉-在工作与生活之间找到平衡是一门深奥的艺术.wav"
+                    ></audio>
+                  </td>
+                  <td>在工作与生活之间找到平衡是一门深奥的艺术</td>
+                  <td class="transcript-cell"><span class="metric best">CER 0.00</span>在工作与生活之间找到平衡是一门深奥的艺术</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 5.00</span>在工作与生活之间找到平衡是一门深<span class="diff-text">厚</span>的艺术</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 5.00</span>在工作与生活之间找到平衡是一门深<span class="diff-text">厚</span>的艺术</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER &gt;100</span><span class="diff-text">搿么侬讲到搿个叫啥个呃吃个物事对伐我觉着也蛮重要个为啥道理呢......</span></td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER 5.00</span>在工作与生活之间找到平衡是一门深<span class="diff-text">厚</span>的艺术</td>
+                  <td class="transcript-cell"><span class="metric cer-error">CER &gt;100</span><span class="diff-text">突然的灵感如同泉涌创作的激情也随之而来热血沸腾</span></td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="method" class="section">
+        <div class="section-head">
+          <h2>Method</h2>
+          <p class="section-subtitle">Architecture and Training</p>
+        </div>
+        <div class="figure-grid">
+          <article class="figure-card">
+            <img src="./assets/fig1-architecture.png" alt="NIM4-ASR architecture diagram" />
+            <h3>Modular ASR Architecture</h3>
+            <p>
+              The architecture comprises a streaming Conformer encoder, a two-layer speech adaptor, a phoneme-level CTC head with a RAG module, 
+              and a Qwen3-1.7B LLM decoder.
+            </p>
+          </article>
+          <article class="figure-card">
+            <img src="./assets/fig2-training.png" alt="NIM4-ASR training pipeline diagram" />
+            <h3>Role-Aligned Training</h3>
+            <p>
+              Training consists of CR-CTC pretraining, alignment, CKA-triggered IA-SFT, late-stage joint SFT, context SFT, 
+              and ASR-specific GRPO-style reinforcement learning.
+            </p>
+          </article>
+        </div>
+        <div class="method-note">
+          Our training design, from pretraining through SFT, is guided by an entropy-allocation analysis of the Encoder–Adaptor–LLM architecture. 
+          Readers interested in this topic can refer to our work: "Rethinking Entropy Allocation in LLM-based ASR: Understanding the Dynamics between Speech Encoders and LLMs"
+          <a class="inline-paper-link" href="https://arxiv.org/pdf/2604.08003" target="_blank" rel="noreferrer">
+            Open paper
+          </a>
+        </div>
+      </section>
+
+      <section class="section split">
+        <div>
+          <p class="section-subtitle">Streaming</p>
+          <h2 class="section-subtitle section-subtitle-small">Real-Time Inference</h2>
+          <p>
+            NIM4-ASR uses a decoupled deployment architecture: the encoder runs on Triton; the adaptor and LLM run in a
+            vLLM-based engine; and the phoneme head with RAG module run on CPU. Speech embeddings are appended incrementally 
+            via streaming chunked prefill, and the LLM performs a final full-context decoding pass after VAD detects the end of speech.
+          </p>
+        </div>
+        <div>
+          <p class="section-subtitle">Customization</p>
+          <h2 class="section-subtitle section-subtitle-small">Phoneme-Level RAG</h2>
+          <p>
+            Hotwords are encoded as phoneme-token sequences in a trie structure built upon an Aho–Corasick automaton for efficient retrieval. 
+            Exact phoneme matching and longest-match filtering support databases containing millions of hotwords while maintaining 
+            sub-millisecond retrieval latency and high precision..
+          </p>
+        </div>
+      </section>
+
+      <section id="results" class="section">
+        <div class="section-head">
+          <h2>Results</h2>
+          <p class="evaluation-note">
+            To reduce evaluation variance caused by surface-form differences, including numeric formatting and 
+            filler-word usage, we normalize all transcriptions with WeTextProcessing, a WFST-based toolkit. 
+            Although normalization may lower absolute error rates, applying the same pipeline to every system 
+            enables a fairer comparison of recognition performance. All baselines are reproduced according to 
+            their official guidelines.
+          </p>
+          <p class="evaluation-tldr">
+            TL;DR: We apply the same WeTextProcessing-based normalization to all systems, reducing formatting-related 
+            noise and enabling fairer comparisons, although the resulting error rates may be lower than those reported 
+            under standard evaluation protocols.
+          </p>
+        </div>
+        <article class="table-card">
+          <h3>Public Benchmarks (Metric: CER/WER)</h3>
+          <div class="table-scroll">
+            <table class="eval-table">
+              <thead>
+                <tr>
+                  <th>Benchmark</th>
+                  <th>Fun-ASR<br /><span>Nano-2512</span></th>
+                  <th>GLM-ASR<br /><span>Nano-2512</span></th>
+                  <th>Qwen3-ASR<br /><span>1.7B</span></th>
+                  <th>FireRedASR2S<br /><span>LLM</span></th>
+                  <th>Step-Audio2<br /><span>Mini</span></th>
+                  <th>Qwen3-Omni<br /><span>30B-A3B Instruct</span></th>
+                  <th class="nim-col">NIM4-ASR<br /><span>(offline)</span></th>
+                  <th>NIM4-ASR<br /><span>(streaming)</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Model Size</td><td>0.8B</td><td>1.5B</td><td>2.0B</td><td>8B+</td><td>8B+</td><td>30B-A3B</td><td class="nim-col">2.3B</td><td>2.3B</td></tr>
+                <tr class="category-row"><td colspan="9">Mandarin</td></tr>
+                <tr><td>AISHELL-1 dev | test</td><td>1.59 | 1.81</td><td>2.40 | 2.41</td><td>1.40 | 1.51</td><td>0.60 | 0.64</td><td>0.76 | 0.81</td><td>0.86 | 0.92</td><td class="nim-col"><strong class="best-value">0.43</strong> | <strong class="best-value">0.57</strong></td><td><strong class="best-value">0.43</strong> | 0.60</td></tr>
+                <tr><td>AISHELL-2-ios dev | test</td><td>2.62 | 2.73</td><td>3.21 | 3.45</td><td>2.41 | 2.60</td><td><strong class="best-value">2.07</strong> | <strong class="best-value">2.08</strong></td><td>2.24 | 2.29</td><td>2.11 | 2.31</td><td class="nim-col">2.28 | 2.43</td><td>2.33 | 2.49</td></tr>
+                <tr><td>AISHELL-2021-Eval A | C | D</td><td>4.75 | 4.29 | 2.33</td><td>7.25 | 9.48 | 3.40</td><td>4.22 | 3.51 | 1.82</td><td>13.40 | 3.92 | 4.68</td><td>4.54 | 3.69 | 2.34</td><td>5.19 | 3.34 | <strong class="best-value">1.66</strong></td><td class="nim-col"><strong class="best-value">3.12</strong> | <strong class="best-value">1.51</strong> | 1.81</td><td>3.28 | 1.63 | 2.22</td></tr>
+                <tr><td>WeNetSpeech meeting | net</td><td>4.68 | 5.22</td><td>6.87 | 5.72</td><td>4.00 | 4.13</td><td><strong class="best-value">3.36</strong> | <strong class="best-value">3.52</strong></td><td>4.23 | 4.63</td><td>3.92 | 3.85</td><td class="nim-col">4.91 | 4.72</td><td>5.71 | 5.00</td></tr>
+                <tr><td>SpeechIO</td><td>2.78</td><td>3.17</td><td>2.55</td><td><strong class="best-value">2.20</strong></td><td>3.41</td><td>2.33</td><td class="nim-col">2.61</td><td>2.84</td></tr>
+                <tr class="category-row"><td colspan="9">Chinese Dialects</td></tr>
+                <tr><td>WeNetSpeech-Chuan easy | hard</td><td>13.21 | 23.76</td><td>20.95 | 33.61</td><td>11.18 | 20.35</td><td><strong class="best-value">10.36</strong> | <strong class="best-value">20.07</strong></td><td>13.99 | 25.35</td><td>14.13 | 25.16</td><td class="nim-col">10.51 | 20.58</td><td>11.22 | 20.37</td></tr>
+                <tr><td>WeNetSpeech-Yue short | long</td><td>7.31 | 10.02</td><td>16.78 | 13.97</td><td>5.79 | <strong class="best-value">8.00</strong></td><td><strong class="best-value">5.05</strong> | 10.45</td><td>7.78 | 8.44</td><td>6.97 | 8.60</td><td class="nim-col">5.12 | 8.58</td><td>5.39 | 9.62</td></tr>
+                <tr><td>KeSpeech</td><td>7.18</td><td>9.59</td><td>4.98</td><td><strong class="best-value">3.05</strong></td><td>3.98</td><td>6.00</td><td class="nim-col">4.40</td><td>5.08</td></tr>
+                <tr class="category-row"><td colspan="9">English</td></tr>
+                <tr><td>LibriSpeech-dev clean | other</td><td>1.63 | 4.06</td><td>1.82 | 3.93</td><td>1.54 | 3.14</td><td>1.27 | 2.63</td><td><strong class="best-value">1.06</strong> | 2.48</td><td>1.08 | <strong class="best-value">2.10</strong></td><td class="nim-col">1.13 | 2.45</td><td>1.18 | 2.86</td></tr>
+                <tr><td>LibriSpeech-test clean | other</td><td>1.63 | 4.35</td><td>1.96 | 4.29</td><td>1.56 | 3.49</td><td>1.29 | 2.97</td><td>1.22 | 2.61</td><td><strong class="best-value">1.15</strong> | <strong class="best-value">2.38</strong></td><td class="nim-col">1.19 | 2.53</td><td>1.29 | 2.92</td></tr>
+                <tr><td>VoxPopuli dev | test</td><td>7.86 | 7.70</td><td>8.78 | 8.52</td><td>7.58 | 7.42</td><td>9.38 | 9.24</td><td>8.86 | 8.37</td><td>6.86 | 6.75</td><td class="nim-col"><strong class="best-value">6.18</strong> | <strong class="best-value">6.08</strong></td><td>6.26 | 6.22</td></tr>
+                <tr><td>MLS-English</td><td>6.80</td><td>5.32</td><td>4.93</td><td>4.71</td><td>4.37</td><td><strong class="best-value">4.04</strong></td><td class="nim-col">4.77</td><td>5.04</td></tr>
+                <tr class="category-row"><td colspan="9">Mandarin–English Code-Switching</td></tr>
+                <tr><td>CS-Dialogue</td><td>5.37</td><td>6.15</td><td>5.44</td><td><strong class="best-value">4.63</strong></td><td>9.46</td><td>8.51</td><td class="nim-col">4.70</td><td>4.91</td></tr>
+                <tr><td>ASCEND</td><td>11.91</td><td>12.29</td><td>10.87</td><td><strong class="best-value">10.22</strong></td><td>13.50</td><td>18.68</td><td class="nim-col">11.46</td><td>11.85</td></tr>
+                <tr class="category-row"><td colspan="9">Lyrics</td></tr>
+                <tr><td>M4Singer</td><td><strong class="best-value">5.25</strong></td><td>18.45</td><td>5.72</td><td>N/A</td><td>9.68</td><td>8.40</td><td class="nim-col">6.39</td><td>6.94</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="table-card">
+          <h3>Internal Benchmarks (Metric: CER/WER)</h3>
+          <div class="table-scroll">
+            <table class="eval-table">
+              <thead>
+                <tr>
+                  <th>Benchmark</th>
+                  <th>Fun-ASR<br /><span>Nano-2512</span></th>
+                  <th>GLM-ASR<br /><span>Nano-2512</span></th>
+                  <th>Qwen3-ASR<br /><span>1.7B</span></th>
+                  <th>FireRedASR2S<br /><span>LLM</span></th>
+                  <th>Step-Audio2<br /><span>Mini</span></th>
+                  <th>Qwen3-Omni<br /><span>30B-A3B Instruct</span></th>
+                  <th class="nim-col">NIM4-ASR<br /><span>(offline)</span></th>
+                  <th>NIM4-ASR<br /><span>(streaming)</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Model Size</td><td>0.8B</td><td>1.5B</td><td>2.0B</td><td>8B+</td><td>8B+</td><td>30B-A3B</td><td class="nim-col">2.3B</td><td>2.3B</td></tr>
+                <tr class="category-row"><td colspan="9">Point of Interest (POI)</td></tr>
+                <tr><td>City A</td><td>7.07</td><td>14.68</td><td>9.14</td><td>8.54</td><td>9.41</td><td>9.67</td><td class="nim-col">3.86</td><td><strong class="best-value">3.85</strong></td></tr>
+                <tr><td>City B</td><td>8.50</td><td>15.75</td><td>10.59</td><td>10.43</td><td>11.67</td><td>11.73</td><td class="nim-col"><strong class="best-value">4.86</strong></td><td>4.94</td></tr>
+                <tr><td>City C</td><td>7.60</td><td>17.55</td><td>10.01</td><td>10.17</td><td>11.35</td><td>12.18</td><td class="nim-col"><strong class="best-value">3.77</strong></td><td>3.81</td></tr>
+                <tr><td>City D</td><td>7.42</td><td>17.91</td><td>9.77</td><td>9.51</td><td>11.55</td><td>10.86</td><td class="nim-col"><strong class="best-value">4.10</strong></td><td>4.17</td></tr>
+                <tr class="category-row"><td colspan="9">Media</td></tr>
+                <tr><td>Music</td><td>12.60</td><td>24.25</td><td>12.67</td><td>12.13</td><td>14.94</td><td>15.89</td><td class="nim-col"><strong class="best-value">5.75</strong></td><td>5.78</td></tr>
+                <tr><td>Video</td><td>8.27</td><td>20.35</td><td>9.69</td><td>9.38</td><td>12.30</td><td>15.33</td><td class="nim-col"><strong class="best-value">2.99</strong></td><td>3.03</td></tr>
+                <tr><td>Radio</td><td>13.69</td><td>19.82</td><td>10.51</td><td>11.84</td><td>14.21</td><td>17.91</td><td class="nim-col">1.21</td><td><strong class="best-value">1.17</strong></td></tr>
+                <tr class="category-row"><td colspan="9">Device Control</td></tr>
+                <tr><td>Vehicle control</td><td>4.74</td><td>8.78</td><td>5.31</td><td>4.52</td><td>4.97</td><td>4.18</td><td class="nim-col">1.88</td><td><strong class="best-value">1.78</strong></td></tr>
+                <tr class="category-row"><td colspan="9">Conversational</td></tr>
+                <tr><td>Vehicle-domain chat easy | hard</td><td>3.75 | 5.92</td><td>5.63 | 10.12</td><td>3.31 | 5.96</td><td>2.93 | 5.61</td><td><strong class="best-value">2.35</strong> | 7.63</td><td>5.98 | 6.60</td><td class="nim-col">2.70 | 4.88</td><td>2.76 | <strong class="best-value">4.83</strong></td></tr>
+                <tr><td>Multi-domain chat</td><td>1.65</td><td>1.89</td><td>1.33</td><td><strong class="best-value">1.27</strong></td><td>1.49</td><td>5.34</td><td class="nim-col">1.55</td><td>1.75</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="table-card">
+          <h3>Hallucination Rate (%)</h3>
+          <div class="table-scroll">
+            <table class="eval-table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Fun-ASR<br /><span>Nano-2512</span></th>
+                  <th>GLM-ASR<br /><span>Nano-2512</span></th>
+                  <th>Qwen3-ASR<br /><span>1.7B</span></th>
+                  <th>FireRedASR2S<br /><span>LLM</span></th>
+                  <th>Step-Audio2<br /><span>Mini</span></th>
+                  <th>Qwen3-Omni<br /><span>30B-A3B Instruct</span></th>
+                  <th class="nim-col">NIM4-ASR<br /><span>(offline w/o RL)</span></th>
+                  <th>NIM4-ASR<br /><span>(offline w/ RL)</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Mandarin (Avg.)</td><td>0.018%</td><td>0.030%</td><td>0.018%</td><td>0.165%</td><td>0.020%</td><td>0.013%</td><td class="nim-col">0.003%</td><td><strong class="best-value">0.002%</strong></td></tr>
+                <tr><td>Dialect (Avg.)</td><td>0.217%</td><td>0.201%</td><td>0.120%</td><td>0.298%</td><td>0.194%</td><td>0.370%</td><td class="nim-col">0.122%</td><td><strong class="best-value">0.117%</strong></td></tr>
+                <tr><td>English (Avg.)</td><td>0.014%</td><td>0.014%</td><td>0.014%</td><td>0.014%</td><td>0.014%</td><td><strong class="best-value">0.007%</strong></td><td class="nim-col"><strong class="best-value">0.007%</strong></td><td><strong class="best-value">0.007%</strong></td></tr>
+                <tr><td>Code-switch (Avg.)</td><td>0.397%</td><td>0.315%</td><td>0.345%</td><td>0.335%</td><td>1.255%</td><td>1.778%</td><td class="nim-col"><strong class="best-value">0.261%</strong></td><td><strong class="best-value">0.261%</strong></td></tr>
+                <tr><td>Lyrics (Avg.)</td><td>0.153%</td><td>0.580%</td><td>0.249%</td><td>1.775%</td><td>0.390%</td><td>0.129%</td><td class="nim-col">0.215%</td><td><strong class="best-value">0.081%</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section id="citation" class="section citation">
+        <div class="section-head">
+          <h2>Citation</h2>
+        </div>
+        <pre><code>@article{xie2026nim4,
+  title={NIM4-ASR: Towards Efficient, Robust, and Customizable Real-Time LLM-Based ASR},
+  author={Xie, Yuan and Song, Jiaqi and Qiu, Guang and Wang, Xianliang and Qiao, Kai and Yuan, Junfeng and Liu, Shengqing and Zhang, Yi and Chen, Bowen and Lei, Ming and others},
+  journal={arXiv preprint arXiv:2604.18105},
+  year={2026}
+}
+
+@article{xie2026rethinking,
+  title={Rethinking Entropy Allocation in LLM-based ASR: Understanding the Dynamics between Speech Encoders and LLMs},
+  author={Xie, Yuan and Song, Jiaqi and Qiu, Guang and Wang, Xianliang and Lei, Ming and Gao, Jie and Wu, Jie},
+  journal={arXiv preprint arXiv:2604.08003},
+  year={2026}
+}</code></pre>
+      </section>
+    </main>
+
+    <footer>
+      <span>Advanced Intelligent Systems Group, NIO</span>
+      <a href="#top">Back to top</a>
+    </footer>
+  </body>
+</html>
